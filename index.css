@@ -1,0 +1,54 @@
+
+body{
+    margin: 0;
+    padding: 0;
+
+    
+}
+
+.header {
+ 
+  align-self: center;
+  padding-bottom: 0;
+  padding-top: 0;
+  margin: 0;
+}
+
+.menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+     
+}
+
+.settingsButton{
+    display: flex;
+    flex-direction: row;
+  
+}
+
+.titleMenu{
+      display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    -webkit-app-region: drag;
+}
+.icon{
+    padding-left: 5%;
+   
+}
+
+#page {
+  background-color: rgba(50, 50, 50, 0.24);
+
+  border-radius: 20px;
+  padding-right: 5%;
+  padding-left: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+#debugText{
+    display: none;
+}
+
