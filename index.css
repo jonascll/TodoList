@@ -1,30 +1,93 @@
+.datepickerLabel{
+    padding: 0.005%;
+}
 
-body{
+
+p, span, h1, h2, h3, h4, h5, h6, input, label{
+     font-family: "Work Sans", sans-serif;
+     color: #FAF9F6;
+}
+
+body {
     margin: 0;
     padding: 0;
-
+    height: 100%; 
+    width: 100%;
     
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
+
+#addButton{
+    width: 20px;
+    height: 20px;
+   
+}
+
+
+.listOfTodo{
+      background-color: rgba(56, 56, 56, 0.5);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      
+    
+}
+
+.inputForm{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    padding-top: 2%  ;
+    padding-bottom: 2%;
+    border-top: 1px solid rgba(20, 20, 20, 1);;
+    border-radius: 10px;
+}
+
+
+.formItem{
+       background-color: rgba(56, 56, 56, 0.5);
+       border: 0;
+       outline: none;
+}
 .header {
- 
+  font-family: "Work Sans", sans-serif;
   align-self: center;
   padding-bottom: 0;
   padding-top: 0;
   margin: 0;
+  margin-bottom: 1%;
 }
 
 .menu{
     display: flex;
     flex-direction: row;
     justify-content: end;
-     
+    margin-left: 94%;
+}
+
+
+#gearIcon:hover{
+    animation-name: rotate;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rotate {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
 }
 
 .settingsButton{
     display: flex;
     flex-direction: row;
-  
+    justify-content: center;
+    align-items: center;
+    
 }
 
 .titleMenu{
@@ -35,20 +98,42 @@ body{
 }
 .icon{
     padding-left: 5%;
-   
+    margin-top: 20%;
+    width: 16px;
+    height: 16px;
+    -webkit-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-app-region: no-drag;
 }
 
-#page {
-  background-color: rgba(50, 50, 50, 0.24);
+.gearIcon{
+    margin-right: 100%;
+    margin-top: 50%;
+    width: 16px;
+    height: 16px;
+    
+    -webkit-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-app-region: no-drag;
+}
 
+
+#page {
+  background-color: rgba(50, 50, 50, 0.3);
+  width: 90%;
+  height: 100%;
   border-radius: 20px;
   padding-right: 5%;
   padding-left: 5%;
   display: flex;
   flex-direction: column;
+  margin: 0;
 }
 
 #debugText{
     display: none;
+    color: greenyellow;
 }
+
+
 

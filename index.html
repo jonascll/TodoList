@@ -1,38 +1,59 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="index.css">
-    <meta charset="UTF-8" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
-    <meta
-      http-equiv="X-Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
-    <title>Hello from Electron renderer!</title>
-  </head>
-  <body>
-    <div id="page">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+  rel="stylesheet">
+
+<head>
+  <link rel="stylesheet" href="index.css">
+  <meta charset="UTF-8" />
+
+  <title>TO DO</title>
+</head>
+
+<body>
+  <div id="page">
     <div class="titleMenu">
-        <div class="settingsButton">
-           <p>test</p>
-        </div>
-        <div>
-            
-        </div>
-        <div class="menu">
-            <p class="icon">test</p>
-            <p class="icon">test</p>
-            <p class="icon">test</p>
-        </div>
+      <div class="settingsButton">
+        <img id="gearIcon" class="gearIcon" src="./Resources/gear-wide.svg"></img>
+      </div>
+      <div>
+
+      </div>
+      <div class="menu">
+        <img id="minimizeIcon" class="icon" src="./Resources/titlebutton-minimize.svg"></img>
+        <img id="maximizeIcon" class="icon" src="./Resources/titlebutton-maximize.svg"></img>
+        <img id="closeIcon" class="icon" src="./Resources/titlebutton-close.svg"></img>
+      </div>
     </div>
-    <h1 class="header">test</h1>
     <p id="debugText"></p>
-    <p>d</p>
-    
-    </div>  
-    </body>
-  <script src="./renderer.js"></script>
+    <h1 class="header">TO DO</h1>
+    <div id="listOfTodo" class="listOfTodo">
+      
+  
+      <div id="inputForm" class="inputForm">
+        <div>
+          <label>Task name</label>
+          <input id="taskName" class="formItem" type="text" placeholder="Task name"></input>
+        </div>
+      
+        <div>
+          <label>Due by</label>
+          <input id="dueDateTime" class="formItem" type="datetime-local"></input>
+        </div>
+        
+        
+        
+        <img id="addButton" src="./Resources/add.svg"></img>
+        
+      </div>
+      
+    </div>
+
+
+  </div>
+</body>
+<script src="./renderer.js"></script>
+
 </html>
