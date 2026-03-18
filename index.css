@@ -52,6 +52,7 @@ body::-webkit-scrollbar {
        background-color: rgba(56, 56, 56, 0.5);
        border: 0;
        outline: none;
+       
 }
 .header {
   font-family: "Work Sans", sans-serif;
@@ -135,5 +136,8 @@ body::-webkit-scrollbar {
     color: greenyellow;
 }
 
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
 
 

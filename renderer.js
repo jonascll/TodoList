@@ -2,12 +2,12 @@
 
 
 const observer = new ResizeObserver(entries => {
-    for(let entry of entries) {
+    for (let entry of entries) {
         const rect = entry.target.getBoundingClientRect()
 
-        window.API.set_size({"width" :rect.width, "height": rect.height})
+        window.API.set_size({ "width": rect.width, "height": rect.height })
     }
-    
+
 })
 
 function Debug(stringToDebug) {
@@ -18,65 +18,118 @@ function Debug(stringToDebug) {
 
 
 window.onload = () => {
-    //const dimensions = await window.API.on_start() 
+
     const page = document.getElementById('page')
-    // page.style.width = dimensions.width + 'px'
-    // page.style.height = dimensions.height + 'px'
     const closeIcon = document.getElementById("closeIcon")
     const maximizeIcon = document.getElementById("maximizeIcon")
     const minimizeIcon = document.getElementById("minimizeIcon")
     const gearIcon = document.getElementById("gearIcon")
     const addButton = document.getElementById("addButton")
-    addButton.addEventListener("mouseenter", () => HandleMouseOverAdd(true, addButton))
-    addButton.addEventListener("mouseleave", () => HandleMouseOverAdd(false, addButton))
+    addButton.addEventListener("mouseenter", () => HandleMouseOverButton(true, addButton))
+    addButton.addEventListener("mouseleave", () => HandleMouseOverButton(false, addButton))
     addButton.addEventListener("mousedown", () => HandleAddTodo())
-    gearIcon.addEventListener('mouseenter', () => HandleMouseOverGear(true, gearIcon))
-    gearIcon.addEventListener('mouseleave', () => HandleMouseOverGear(false, gearIcon))
+    gearIcon.addEventListener('mouseenter', () => HandleMouseOverButton(true, gearIcon))
+    gearIcon.addEventListener('mouseleave', () => HandleMouseOverButton(false, gearIcon))
     gearIcon.addEventListener('mousedown', () => HandleGearClicked())
-    closeIcon.addEventListener('mouseenter', () => HandleMouseOverClose(true, closeIcon))
-    closeIcon.addEventListener('mouseleave', () => HandleMouseOverClose(false, closeIcon))
-    closeIcon.addEventListener('mousedown', () => {window.close()})
-    maximizeIcon.addEventListener('mouseenter', () => HandleMouseOverMaximize(true, maximizeIcon))
-    maximizeIcon.addEventListener('mouseleave', () => HandleMouseOverMaximize(false, maximizeIcon))
-    minimizeIcon.addEventListener('mouseenter', () => HandleMouseOverMinimize(true, minimizeIcon))
-    minimizeIcon.addEventListener('mouseleave', () => HandleMouseOverMinimize(false, minimizeIcon))
+    closeIcon.addEventListener('mouseenter', () => HandleMouseOverButton(true, closeIcon))
+    closeIcon.addEventListener('mouseleave', () => HandleMouseOverButton(false, closeIcon))
+    closeIcon.addEventListener('mousedown', () => { window.close() })
+    maximizeIcon.addEventListener('mouseenter', () => HandleMouseOverButton(true, maximizeIcon))
+    maximizeIcon.addEventListener('mouseleave', () => HandleMouseOverButton(false, maximizeIcon))
+    minimizeIcon.addEventListener('mouseenter', () => HandleMouseOverButton(true, minimizeIcon))
+    minimizeIcon.addEventListener('mouseleave', () => HandleMouseOverButton(false, minimizeIcon))
     observer.observe(page)
-   
+
 }
 
 
 
 function HandleAddTodo() {
-   const div = document.createElement("div")
-   div.style.display = "flex"
-   div.style.direction = "row"
-   div.style.justifyContent = "space-around"
-   const nameSpan = document.createElement("span")
-   nameSpan.innerText = document.getElementById("taskName").value
-   const dueDateTimeSpan = document.createElement("span")
-   dueDateTimeSpan.innerText = document.getElementById("dueDateTime").value
-   div.appendChild(nameSpan)
-   div.appendChild(dueDateTimeSpan)
-   
-   
-   const list = document.getElementById("listOfTodo")
-   const inputForm = document.getElementById("inputForm")
-   list.insertBefore(div, inputForm)
-   ResetInputs()
+    if (document.getElementById("taskName").value == "" || document.getElementById("dueDateTime").value == "") {
+        return
+    }
+    const dateToFormat = new Date(document.getElementById("dueDateTime").value)
+    const nameSpan = document.createElement("span")
+
+    nameSpan.innerText = document.getElementById("taskName").value
+    const dueDateTimeSpan = document.createElement("span")
+    dueDateTimeSpan.innerText = dateToFormat.toLocaleString()
+
+    const iconDivs = document.createElement("div")
+    iconDivs.style.display = "flex"
+    iconDivs.style.flexDirection = "row"
+    iconDivs.style.justifyContent = "space-evenly"
+    iconDivs.style.alignItems = "center"
+    const checkIcon = document.createElement("img")
+    checkIcon.style.width = "20px"
+    checkIcon.style.height = "20px"
+    checkIcon.src = "./Resources/done.svg"
+    checkIcon.setAttribute("name", "done")
+    //TODO:: write on click event in future
+    checkIcon.addEventListener("mouseenter", () => HandleMouseOverButton(true, checkIcon))
+    checkIcon.addEventListener('mouseleave', () => HandleMouseOverButton(false, checkIcon))
+    const trashIcon = document.createElement("img")
+    trashIcon.style.width = "20px"
+    trashIcon.style.height = "20px"
+    trashIcon.src = "./Resources/trash.svg"
+    trashIcon.setAttribute("name", "trash")
+    //TODO:: write on click event in future
+    trashIcon.addEventListener("mouseenter", () => HandleMouseOverButton(true, trashIcon))
+    trashIcon.addEventListener("mouseleave", () => HandleMouseOverButton(false, trashIcon))
+    iconDivs.appendChild(trashIcon)
+    iconDivs.appendChild(checkIcon)
+
+    const div = document.createElement("div")
+    div.style.display = "flex"
+    div.style.flexDirection = "row"
+    div.style.justifyContent = "space-around"
+    div.style.alignItems = "center"
+    div.style.padding = "1%"
+    const nameDiv = document.createElement('div')
+    nameDiv.style.display = "flex"
+    nameDiv.style.flexDirection = "row"
+    nameDiv.style.justifyContent = "center"
+    nameDiv.style.flex = 1
+    nameDiv.style.minWidth = 0
+    nameDiv.style.textAlign = "start"
+    nameSpan.style.flex = "0 1 auto"
+    nameSpan.style.minWidth = 0;
+    nameSpan.style.overflowWrap = "break-word"
+    nameDiv.appendChild(nameSpan)
+    const dateDiv = document.createElement('div')
+    dateDiv.style.display = "flex"
+    dateDiv.style.flexDirection = "row"
+    dateDiv.style.justifyContent = "center"
+    dateDiv.style.alignItems = "center"
+    dateDiv.style.flex = 1
+    dateDiv.style.minWidth = 0
+    dateDiv.style.textAlign = "center"
+    dueDateTimeSpan.style.minWidth = 0;
+    dueDateTimeSpan.style.flex = "0 1 auto"
+    dueDateTimeSpan.style.overflowWrap = "break-word"
+    dateDiv.appendChild(dueDateTimeSpan)
+    iconDivs.style.flex = "1 1 0px"
+    div.appendChild(nameDiv)
+    div.appendChild(dateDiv)
+    div.appendChild(iconDivs)
+    const list = document.getElementById("listOfTodo")
+    const inputForm = document.getElementById("inputForm")
+    list.insertBefore(div, inputForm)
+    ResetInputs()
 }
 
 function ResetInputs() {
     document.getElementById("taskName").value = ""
     document.getElementById("dueDateTime").value = null
-    
+
 }
 
 function HandleGearClicked() {
-    
+
 }
 
 function HandleMouseOverAdd(hovered, element) {
-    if(hovered) {
+    if (hovered) {
         element.src = "./Resources/add-active.svg"
     } else {
         element.src = "./Resources/add.svg"
@@ -84,23 +137,24 @@ function HandleMouseOverAdd(hovered, element) {
 }
 
 function HandleMouseOverClose(hovered, element) {
-    if(hovered) {
+    if (hovered) {
         element.src = "./Resources/titlebutton-close-active.svg"
     } else {
         element.src = "./Resources/titlebutton-close.svg"
     }
+    Debug(element.name)
 }
 
 function HandleMouseOverMaximize(hovered, element) {
-    if(hovered) {
+    if (hovered) {
         element.src = "./Resources/titlebutton-maximize-active.svg"
     } else {
         element.src = "./Resources/titlebutton-maximize.svg"
     }
-} 
+}
 
 function HandleMouseOverMinimize(hovered, element) {
-    if(hovered) {
+    if (hovered) {
         element.src = "./Resources/titlebutton-minimize-active.svg"
     } else {
         element.src = "./Resources/titlebutton-minimize.svg"
@@ -109,7 +163,7 @@ function HandleMouseOverMinimize(hovered, element) {
 
 function HandleMouseOverGear(hovered, element) {
 
-if(hovered) {
+    if (hovered) {
         element.src = "./Resources/gear-wide-active.svg"
     } else {
         element.src = "./Resources/gear-wide.svg"
@@ -117,10 +171,18 @@ if(hovered) {
 }
 
 
+function HandleMouseOverButton(hovered, element) {
+    if(hovered) {
+        element.src = `./Resources/${element.name}-active.svg`
+    } else {
+        element.src = `./Resources/${element.name}.svg`
+    }
+}
+
 
 
 window.addEventListener('contextmenu', (e) => {
-  e.preventDefault();
+    e.preventDefault();
 }, false);
 
 
