@@ -52,6 +52,7 @@ app.whenReady().then(() => {
   ipcMain.handle("on_start", () => { return { listOfTodos } })
   ipcMain.handle("add_todo", (_event, todo) => HandleAddTodoToJson(todo))
   ipcMain.handle("remove_todo", (_event, todoId) => HandleRemoveTodo(todoId))
+  ipcMain.handle("generate_uid", () => {return GenerateUid()})
     win = createWindow()
 
     
@@ -121,3 +122,8 @@ function HandleJsonCreation(pathToJson) {
     }
   }
 }
+
+
+ function GenerateUid(){
+        return Date.now().toString(36) + Math.random().toString(36).substring(2);
+ }

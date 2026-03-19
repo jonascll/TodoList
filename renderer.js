@@ -48,7 +48,7 @@ window.onload = async () => {
 
 
 
-function HandleAddTodo() {
+async function HandleAddTodo() {
     if (document.getElementById("taskName").value == "" || document.getElementById("dueDateTime").value == "") {
         return
     }
@@ -120,7 +120,7 @@ function HandleAddTodo() {
     div.appendChild(iconDivs)
     const list = document.getElementById("listOfTodo")
     const inputForm = document.getElementById("inputForm")
-    div.id = "Todo" + listOfTodos.length
+    div.id = await window.API.generate_uid()
     list.insertBefore(div, inputForm)
     var todo = new Todo(div.id, nameSpan.innerText, dueDateTimeSpan.innerText)
     window.API.add_todo(todo)
