@@ -95,13 +95,9 @@ function UpdateJson(data) {
 
 async function HandleArrayRead(pathToJson) {
   try {
-        // Construct an absolute path to avoid "file not found" issues
-       
-        
-        // Read the file as a string
         const fileContent = fs.readFileSync(jsonPath, 'utf-8');
         
-        // Parse the string into a JS object
+
         const data = JSON.parse(fileContent);
         
         listOfTodos = data.listOfTodos;
@@ -127,3 +123,6 @@ function HandleJsonCreation(pathToJson) {
  function GenerateUid(){
         return Date.now().toString(36) + Math.random().toString(36).substring(2);
  }
+
+
+ 

@@ -1,5 +1,5 @@
 
-
+var openedSettings = false
 var listOfTodos = []
 
 const observer = new ResizeObserver(entries => {
@@ -32,7 +32,7 @@ window.onload = async () => {
     addButton.addEventListener("mousedown", () => HandleAddTodo())
     gearIcon.addEventListener('mouseenter', () => HandleMouseOverButton(true, gearIcon))
     gearIcon.addEventListener('mouseleave', () => HandleMouseOverButton(false, gearIcon))
-    gearIcon.addEventListener('mousedown', () => HandleGearClicked())
+    gearIcon.addEventListener('mousedown', (event) => HandleGearClicked(event))
     closeIcon.addEventListener('mouseenter', () => HandleMouseOverButton(true, closeIcon))
     closeIcon.addEventListener('mouseleave', () => HandleMouseOverButton(false, closeIcon))
     closeIcon.addEventListener('mousedown', () => { window.close() })
@@ -44,6 +44,7 @@ window.onload = async () => {
     var temp = await window.API.on_start()
     listOfTodos = temp.listOfTodos
     populateTodosOnStart(listOfTodos)
+   
 }
 
 
@@ -133,8 +134,8 @@ function ResetInputs() {
     document.getElementById("dueDateTime").value = null
 }
 
-function HandleGearClicked() {
-
+function HandleGearClicked(event) {
+    CreateSettingsWidget(event.clientX, event.clientY)
 }
 
 function HandleMouseOverAdd(hovered, element) {
@@ -282,4 +283,26 @@ async function HandleRemoveTodo(element) {
     element.parentNode.parentNode.remove()
 }
 
-
+//TODO:: figure out what settings there will be on top of window size
+function CreateSettingsWidget(posX, posY) {
+    const settingsWidget = document.createElement("div")
+    settingsWidget.style.position = "absolute"
+    settingsWidget.style.left = posX + "px"
+    settingsWidget.style.top = (posY + 20) + "px"
+    settingsWidget.style.width = "200px"
+    settingsWidget.style.height = "150px"
+    settingsWidget.style.backgroundColor = "rgba(50, 50, 50, 1)"
+    settingsWidget.style.borderRadius = "10px"
+    settingsWidget.style.zIndex = "1000";
+    
+        settingsWidget.addEventListener("mouseleave", () => {
+            settingsWidget.remove();
+            openedSettings = false
+        });
+    
+  
+    if(!openedSettings) {
+          document.body.appendChild(settingsWidget);
+          openedSettings = true
+    }
+}
