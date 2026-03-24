@@ -1,14 +1,3 @@
 {
-  "listOfTodos": [
-    {
-      "id": "mmz9lo74k821v6spltc",
-      "taskName": "daddddddddddddddddd",
-      "dueDateTime": "4/11/2026, 8:01:00 PM"
-    },
-    {
-      "id": "mmz9lrwy7pjc7w7nb3n",
-      "taskName": "aaaaaaaaaaaaaaaaaa",
-      "dueDateTime": "4/11/2026, 8:01:00 PM"
-    }
-  ]
+  "listOfTodos": []
 }

@@ -8,12 +8,12 @@ p, span, h1, h2, h3, h4, h5, h6, input, label{
      color: #FAF9F6;
 }
 
-body {
+html, body {
     margin: 0;
     padding: 0;
-    height: 100%; 
-    width: 100%;
-    
+    height: 100vh; 
+    width: 100vw;
+    overflow: hidden;
 }
 
 body::-webkit-scrollbar {
@@ -30,11 +30,33 @@ body::-webkit-scrollbar {
 
 .listOfTodo{
       background-color: rgba(56, 56, 56, 0.5);
-      border-radius: 10px;
+      border-radius: 10px  10px 0px 0px;
       display: flex;
-      flex-direction: column;
-      
-    
+      flex-direction: column-reverse;
+      flex-grow: 1;       
+      overflow-y: auto;   
+      min-height: 0;      
+      margin-top: 2.5%;
+}
+
+.listOfTodo::-webkit-scrollbar {
+    width: 8px;
+    display: block;
+}
+
+
+.listOfTodo::-webkit-scrollbar-thumb {
+    background: rgba(150, 150, 150, 0.2); 
+    border-radius: 10px;
+    border: 2px solid transparent; 
+    background-clip: content-box;
+}
+.listOfTodo::-webkit-scrollbar-track {
+    background: transparent; 
+}
+.listOfTodo::-webkit-scrollbar-thumb:hover {
+    background: rgba(250, 249, 246, 0.5);
+    background-clip: content-box;
 }
 
 .inputForm{
@@ -44,7 +66,9 @@ body::-webkit-scrollbar {
     padding-top: 2%  ;
     padding-bottom: 2%;
     border-top: 1px solid rgba(20, 20, 20, 1);;
-    border-radius: 10px;
+    border-radius: 0px 0px 10px 10px;
+    margin-bottom: 5%;
+    background-color: rgba(56, 56, 56, 0.5);
 }
 
 
@@ -60,14 +84,15 @@ body::-webkit-scrollbar {
   padding-bottom: 0;
   padding-top: 0;
   margin: 0;
-  margin-bottom: 1%;
+  margin-bottom: auto;
 }
 
 .menu{
     display: flex;
     flex-direction: row;
     justify-content: end;
-    margin-left: 94%;
+    align-items: center;
+    gap: 3px;
 }
 
 
@@ -92,10 +117,12 @@ body::-webkit-scrollbar {
 }
 
 .titleMenu{
-      display: flex;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
+   width: 100%;
     -webkit-app-region: drag;
+    padding: 5px 10px;
 }
 .icon{
     padding-left: 5%;
@@ -121,14 +148,27 @@ body::-webkit-scrollbar {
 
 #page {
   background-color: rgba(50, 50, 50, 0.3);
-  width: 90%;
+  width: 100%;
   height: 100%;
-  border-radius: 20px;
+  border-radius: 10px;
   padding-right: 5%;
   padding-left: 5%;
   display: flex;
   flex-direction: column;
   margin: 0;
+  box-sizing: border-box; 
+  overflow: hidden;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  
+    -webkit-appearance: none;
+    margin: 0; 
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
 }
 
 #debugText{

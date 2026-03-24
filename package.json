@@ -8,13 +8,22 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "export NODE_ENV=development&&electron ."
+    "start": "export NODE_ENV=development&&electron .",
+    "app:dir": "electron-builder --dir",
+    "app:dist": "electron-builder"
   },
   "devDependencies": {
     "electron": "^41.0.2",
     "electron-reloader": "^1.2.3"
   },
   "dependencies": {
+  
     "electron-reload": "^2.0.0-alpha.1"
+  },
+  "build": {
+  "appId": "todo.id",
+  "mac": {
+    "category": "your.app.category.type"
   }
+}
 }
