@@ -8,8 +8,8 @@ const width = 800;
 const height = 0;
 var listOfTodos = []
 var settings = {};
-const dataPath = path.join(__dirname, 'Data', 'data.json');
-const settingsPath = path.join(__dirname, "Data", 'settings.json')
+const dataPath = path.join(app.getPath("userData"), "data.json")
+const settingsPath = path.join(app.getPath("userData"), "settings.json")
 
 if (env === 'development') {
   try {
@@ -46,12 +46,8 @@ app.whenReady().then(() => {
 
 
 
-  var dir = path.join(__dirname, 'Data');
-
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
-  }
-  HandleJsonCreation(dataPath, settingsPath)
+ 
+  HandleJsonCreation()
   ReadSettings(settingsPath)
 
   HandleArrayRead(dataPath)
@@ -145,10 +141,10 @@ async function HandleArrayRead(pathToJson) {
   }
 }
 
-function HandleJsonCreation(pathToJsonData, pathToJsonSettings) {
+function HandleJsonCreation() {
   try {
  
-    fs.writeFileSync(pathToJsonData, JSON.stringify({ listOfTodos: [] }), { flag: 'wx' });
+    fs.writeFileSync(path.join(app.getPath("userData"), "data.json"), JSON.stringify({ listOfTodos: [] }), { flag: 'wx' });
    
 
   } catch (err) {
@@ -158,7 +154,7 @@ function HandleJsonCreation(pathToJsonData, pathToJsonSettings) {
     }
   }
   try {
-     fs.writeFileSync(pathToJsonSettings, JSON.stringify({
+     fs.writeFileSync(path.join(app.getPath("userData"), "settings.json"), JSON.stringify({
      settings: {
     width: 800,
     height: 250,

@@ -1,9 +1,0 @@
-{
-  "settings": {
-    "width": "700",
-    "height": 800,
-    "dayBeforeColor": "rgba(51, 185, 24, 0.2)",
-    "sameDayColor": "rgba(229, 204, 36, 0.2)",
-    "lateColor": "rgba(157, 42, 42, 0.2)"
-  }
-}
